@@ -5,22 +5,60 @@
 
 using namespace std;
 
+
 // Classe Pessoa
 class Pessoa {
 
 private:
     string nome;
     int idade;
+    string cpf;
 
 public:
     Pessoa(string n = "", int i = 0) : nome(n), idade(i) {}
-
-    void setNome(string n) { nome = n; }
-    void setIdade(int i) { idade = i; }
-
-    string getNome() const { return nome; }
-    int getIdade() const { return idade; }
+    void setcpf(string c);
+    void setNome(string n);
+    void setIdade(int i);
+    string getcpf(){ return cpf;}
+    string getNome() { return nome; }
+    int getIdade() { return idade; }
 };
+    void Pessoa::setcpf(string c){
+        if(c.empty()){
+           while (c.empty()) {
+        cout << "Nome não pode ser vazio. Digite novamente: ";
+        getline(cin >> ws, c); 
+        }}
+        if(c.length() < 11){
+            while (c.empty()){ 
+            cout << "Cpf não pode ter menos de 11 caracteres. Digite novamente: ";
+            getline(cin >> ws, c);
+            }
+        }
+        cpf = c;
+    }
+
+    void Pessoa::setNome(string name){
+        if(nome.empty()){ 
+        while (nome.empty()) {
+        cout << "Nome não pode ser vazio. Digite novamente: ";
+        getline(cin >> ws, name);
+            nome = name;
+    }} else{ nome = name; }
+}
+    void Pessoa::setIdade(int i){
+        if(i > 100){
+            cout << "Idade inválida. Digite novamente:";
+            cin >> i;
+        }
+        idade = i;
+    } 
+
+
+
+
+
+
 
 // Classe Paciente 
 class Paciente : public Pessoa {
@@ -34,30 +72,22 @@ public:
         : Pessoa(n, i), telefone(t), convenio(c), particular(p) {}
 
     void setTelefone(string t) { telefone = t; }
-    void setConvenio(bool c) { convenio = c; }
-    void setParticular(bool p) { particular = p; }
+    void setPagamento(int i);
 
     string getTelefone() const { return telefone; }
     bool getConvenio() const { return convenio; }
     bool getParticular() const { return particular; }
 };
 
-// Classe Médico
-class Medico: public Pessoa{
-    private:
-    string especializacao;
-    string CRM;
-
-public:
-    Medico(string n = "", int i = 0, string e = "", string c = "")
-        : Pessoa(n, i), especializacao(e), CRM(c) {}
-
-    void setEspecializacao(string e) { especializacao = e; }
-    void setCRM(string c) { CRM = c; }
-
-    string getEspecializacao() const { return especializacao; }
-    string getCRM() const { return CRM; }
-};    
+void Paciente::setPagamento(int i){
+    if(i == 0){
+        convenio = true;
+        particular = false;
+    } else if(i == 1){
+        convenio = false;
+        particular = true;
+    }
+}
 
 // Enumeração para tipos de consulta 
 enum class TipodeConsulta {
@@ -72,7 +102,7 @@ enum class TipodeConsulta {
 class Consulta {
 private:
     Paciente paciente;
-    Medico medico;
+    string medico[5];
     string data;
     string horario;
     TipodeConsulta tipo;
@@ -80,12 +110,11 @@ private:
     string dataProcedimento;
 
 public:
-    Consulta(Paciente p = Paciente(), Medico m = Medico(), string d = "", string h = "",
+    Consulta(Paciente p = Paciente(), string d = "", string h = "",
              TipodeConsulta t = TipodeConsulta::RESTAURACAO, string pr = "", string dP = "")
-        : paciente(p), medico(m), data(d), horario(h), tipo(t), parecer(pr), dataProcedimento(dP) {}
+        : paciente(p), data(d), horario(h), tipo(t), parecer(pr), dataProcedimento(dP) {}
 
     void setPaciente(const Paciente& p) { paciente = p; }
-    void setMedico(const Medico& m) { medico = m; }
     void setData(const string& d) { data = d; }
     void setHorario(const string& h) { horario = h; }
     void setTipodeConsulta(TipodeConsulta t) { tipo = t; }
@@ -94,7 +123,6 @@ public:
     void setDataProcedimento(const string& dP) { dataProcedimento = dP; }
 
     Paciente getPaciente() const { return paciente; }
-    Medico getMedico() const { return medico; }
     string getData() const { return data; }
     string getHorario() const { return horario; }
     TipodeConsulta getTipodeConsulta() const { return tipo; }

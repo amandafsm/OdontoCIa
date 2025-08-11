@@ -1,11 +1,15 @@
 #include "menu.cpp"
+#include "crud.hpp"
+#pragma once
 
-
-int main() {
+int main()
+{
     carregarDoArquivo();
     int opcao;
+    Menu m1;
 
-    do {
+    do
+    {
         cout << "\n--- Menu ---\n";
         cout << "1. Agendar Paciente\n";
         cout << "2. Editar Paciente\n";
@@ -16,13 +20,25 @@ int main() {
         cin >> opcao;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        switch (opcao) {
-            case 1: agendarPaciente(); break;
-            case 2: editarPaciente(); break;
-            case 3: excluirPaciente(); break;
-            case 4: listarPaciente(); break;
-            case 5: cout << "Saindo...\n"; break;
-            default: cout << "Opção inválida!\n";
+        switch (opcao)
+        {
+        case 1:
+            m1.agendarPaciente();
+            break;
+        case 2:
+            m1.editarPaciente();
+            break;
+        case 3:
+            m1.excluirPaciente();
+            break;
+        case 4:
+            m1.listarPaciente();
+            break;
+        case 5:
+            cout << "Saindo...\n";
+            break;
+        default:
+            cout << "Opção inválida!\n";
         }
     } while (opcao != 5);
 
