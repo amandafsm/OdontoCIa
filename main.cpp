@@ -1,10 +1,8 @@
-#include "menu.cpp"
 #include "crud.hpp"
 #pragma once
 
 int main()
 {
-    carregarDoArquivo();
     int opcao;
     Menu m1;
 
@@ -18,7 +16,6 @@ int main()
         cout << "5. Sair\n";
         cout << "Escolha uma opção: ";
         cin >> opcao;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (opcao)
         {

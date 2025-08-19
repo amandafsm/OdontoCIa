@@ -36,10 +36,6 @@ void Menu::editarPaciente()
             cin.ignore();
             cout << "Novo nome: " << endl;
             getline(cin, novoNome);
-            if (novoNome.empty())
-            {
-                novoNome = validarNome(novoNome);
-            }
             paciente[i].setNome(novoNome);
             cout << "Novo procedimento: " << endl;
             getline(cin, novoProcedimento);
