@@ -73,7 +73,7 @@ string validarNome(string nome)
 }
 void Menu::agendarPaciente()
 {
-    string nomeP, telefone, data, horario;
+    string nomeP, telefone, data, horario, cpf;
     float peso;
     int idadeP, idadeM, tipoInt, consulta;
     bool conv, part;
@@ -86,6 +86,8 @@ void Menu::agendarPaciente()
     {
         nomeP = validarNome(nomeP);
     }
+    cout << "Cpf do Paciente: ";
+    getline(cin >> ws, cpf);
 
     // Idade do paciente
     cout << "Idade do paciente: ";
@@ -136,6 +138,7 @@ void Menu::agendarPaciente()
     bool dataValida = false;
     while (!dataValida)
     {
+        cout << "Insira a data da Consulta: " << endl;
         cout << "Data " << endl;
         cout << "Dia: ";
         cin >> dia;
@@ -241,3 +244,5 @@ void Menu::listarPaciente()
         }
     }
 }
+
+
