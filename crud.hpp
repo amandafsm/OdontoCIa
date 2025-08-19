@@ -13,6 +13,8 @@ protected:
 public:
     void agendarPaciente();
     void editarPaciente();
+    void excluirPaciente ();
+    void listarPaciente ();
 };
 
 void Menu::editarPaciente()
@@ -199,4 +201,43 @@ void Menu::agendarPaciente()
     cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): ";
     cin >> consulta;
     cin.ignore();
+}
+void Menu::excluirPaciente()
+{
+    string cpfBusca;
+    cout << "Digite o CPF do paciente a ser excluído: ";
+    cin >> cpfBusca;
+    bool encontrado = false;
+
+    for (int i = 0; i < 100; i++)
+    {
+        if (paciente[i].getcpf() == cpfBusca)
+        {
+            encontrado = true;
+            // "Remove" o paciente sobrescrevendo com um objeto padrão
+            paciente[i] = Paciente(); // Supondo que Paciente tem um construtor padrão
+            cout << "Paciente excluído com sucesso!\n";
+            break;
+        }
+    }
+    if (!encontrado)
+    {
+        cout << "Paciente não encontrado.\n";
+    }
+}
+void Menu::listarPaciente()
+{
+    cout << "Lista de pacientes:\n";
+    for (int i = 0; i < 100; i++)
+    {
+        // Supondo que getNome() retorna uma string não vazia para pacientes cadastrados
+        if (!paciente[i].getNome().empty())
+        {
+            cout << "Nome: " << paciente[i].getNome() << endl;
+            cout << "CPF: " << paciente[i].getcpf() << endl;
+            cout << "Idade: " << paciente[i].getIdade() << endl;
+            cout << "Telefone: " << paciente[i].getTelefone() << endl;
+            cout << "------------------------" << endl;
+        }
+    }
 }
