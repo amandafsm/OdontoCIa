@@ -12,7 +12,7 @@ int main()
         cout << "1. Agendar Paciente\n";
         cout << "2. Editar Paciente\n";
         cout << "3. Excluir Paciente\n";
-        cout << "4. Listar Paciente\n";
+        cout << "4. Listar Pacientes\n";
         cout << "5. Sair\n";
         cout << "Escolha uma opção: ";
         cin >> opcao;

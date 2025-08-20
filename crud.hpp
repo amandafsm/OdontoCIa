@@ -15,7 +15,16 @@ public:
     void editarPaciente();
     void excluirPaciente ();
     void listarPaciente ();
+    int acharPosicao();
 };
+
+int Menu::acharPosicao(){
+    for(int i = 0; i < 100; i++){
+        if(paciente[i].getNome() == ""){
+            return i;
+        } else{continue;}
+    }
+}
 
 void Menu::editarPaciente()
 {
@@ -76,21 +85,20 @@ void Menu::agendarPaciente()
     string nomeP, telefone, data, horario, cpf;
     float peso;
     int idadeP, idadeM, tipoInt, consulta;
-    bool conv, part;
-
+    
     // preciso de algo que me permita usar essa função e escrever na posição certa do array de consultas.
     //  Nome do paciente
-    cout << "Nome do paciente: ";
+    cout << "NOME: ";
     getline(cin >> ws, nomeP);
     if (nomeP.empty())
     {
         nomeP = validarNome(nomeP);
     }
-    cout << "Cpf do Paciente: ";
+    cout << "CPF: ";
     getline(cin >> ws, cpf);
 
     // Idade do paciente
-    cout << "Idade do paciente: ";
+    cout << "IDADE: ";
     cin >> idadeP;
     while (cin.fail() || idadeP <= 0 || idadeP > 80)
     {
@@ -102,7 +110,7 @@ void Menu::agendarPaciente()
     cin.ignore();
 
     // Peso do paciente
-    cout << "Peso do paciente: ";
+    cout << "PESO: ";
     cin >> peso;
     while (cin.fail() || peso <= 0 || peso > 200)
     {
@@ -114,32 +122,22 @@ void Menu::agendarPaciente()
     cin.ignore();
 
     // Telefone
-    cout << "Telefone: ";
+    cout << "TELEFONE: ";
     getline(cin, telefone);
     while (telefone.empty() || telefone.length() < 11)
     {
         cout << "Telefone inválido. Digite novamente: ";
         getline(cin >> ws, telefone);
     }
-    cout << "Convênio ou Particular " << endl;
+    cout << "Convênio ou Particular" << endl;
     cout << "(1-Particular, 0-Convenio): ";
     cin >> tipoInt;
-    if (tipoInt == 0)
-    {
-        conv = false;
-        part = true;
-    }
-    else if (tipoInt == 1)
-    {
-        conv = true;
-        part = false;
-    }
+  
     int dia, mes, ano;
     bool dataValida = false;
     while (!dataValida)
     {
         cout << "Insira a data da Consulta: " << endl;
-        cout << "Data " << endl;
         cout << "Dia: ";
         cin >> dia;
         cout << "Mes: ";
@@ -201,9 +199,15 @@ void Menu::agendarPaciente()
         cout << "Horário inválido. Digite novamente (formato HH:MM): ";
         getline(cin, horario);
     }
-    cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): ";
+    cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): " << endl;
     cin >> consulta;
     cin.ignore();
+    paciente[acharPosicao()].setNome(nomeP);
+    paciente[acharPosicao()].setcpf(cpf);
+    paciente[acharPosicao()].setIdade(idadeP);
+    paciente[acharPosicao()].setPagamento(tipoInt);
+    paciente[acharPosicao()].setTelefone(telefone);
+    //implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
 }
 void Menu::excluirPaciente()
 {
@@ -230,6 +234,11 @@ void Menu::excluirPaciente()
 }
 void Menu::listarPaciente()
 {
+
+    int cond = 0;
+    cout << "Listar todos[0]" << endl << "Listar apenas um paciente[1]" << endl;
+    cin >> cond;
+    if(cond == 1){
     cout << "Lista de pacientes:\n";
     for (int i = 0; i < 100; i++)
     {
@@ -243,6 +252,24 @@ void Menu::listarPaciente()
             cout << "------------------------" << endl;
         }
     }
+} else if(cond == 0){
+    cout << "Digite o CPF do Paciente: " << endl;
+    string cpfbusca = "";
+    getline(cin >> ws, cpfbusca);
+    for(int i = 0; i < 100; i++){
+        if(paciente[i].getcpf() == cpfbusca){
+            cout << "Nome: " << paciente[i].getNome() << endl;
+            cout << "CPF: " << paciente[i].getcpf() << endl;
+            cout << "Idade: " << paciente[i].getIdade() << endl;
+            cout << "Telefone: " << paciente[i].getTelefone() << endl;
+            cout << "------------------------" << endl;
+        } else{
+            continue;
+        }
+    }
+
+}
+
 }
 
 
