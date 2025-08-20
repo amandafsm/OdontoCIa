@@ -39,13 +39,14 @@ public:
         cpf = c;
     }
 
-    void Pessoa::setNome(string name){
-        if(nome.empty()){ 
-        while (nome.empty()) {
+    void Pessoa::setNome(string n){
+        string temp = "";
+        if(n.empty()){ 
+        while (temp.empty()) {
         cout << "Nome não pode ser vazio. Digite novamente: ";
-        getline(cin >> ws, name);
-            nome = name;
-    }} else{ nome = name; }
+        getline(cin >> ws, temp);
+            nome = temp;
+    }} else{ nome = n; }
 }
     void Pessoa::setIdade(int i){
         if(i > 100){

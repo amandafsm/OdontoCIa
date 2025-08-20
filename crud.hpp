@@ -22,8 +22,10 @@ int Menu::acharPosicao(){
     for(int i = 0; i < 100; i++){
         if(paciente[i].getNome() == ""){
             return i;
-        } else{continue;}
+        }
     }
+    // Se não houver posição disponível, retorna sempre a última posição
+    return 99;
 }
 
 void Menu::editarPaciente()
@@ -85,17 +87,16 @@ void Menu::agendarPaciente()
     string nomeP, telefone, data, horario, cpf;
     float peso;
     int idadeP, idadeM, tipoInt, consulta;
-    
-    // preciso de algo que me permita usar essa função e escrever na posição certa do array de consultas.
+    int pos = 0;
+    pos = acharPosicao();
     //  Nome do paciente
     cout << "NOME: ";
     getline(cin >> ws, nomeP);
-    if (nomeP.empty())
-    {
-        nomeP = validarNome(nomeP);
-    }
+    paciente[pos].setNome(nomeP);
+
     cout << "CPF: ";
     getline(cin >> ws, cpf);
+    paciente[pos].setcpf(cpf);
 
     // Idade do paciente
     cout << "IDADE: ";
@@ -108,18 +109,19 @@ void Menu::agendarPaciente()
         cin >> idadeP;
     }
     cin.ignore();
+    paciente[pos].setIdade(idadeP);
 
     // Peso do paciente
-    cout << "PESO: ";
-    cin >> peso;
-    while (cin.fail() || peso <= 0 || peso > 200)
-    {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Peso inválido. Digite novamente: ";
-        cin >> peso;
-    }
-    cin.ignore();
+//    cout << "PESO: ";
+//    cin >> peso;
+//    while (cin.fail() || peso <= 0 || peso > 200)
+//    {
+//        cin.clear();
+//        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+//        cout << "Peso inválido. Digite novamente: ";
+//        cin >> peso;
+//    }
+//    cin.ignore();
 
     // Telefone
     cout << "TELEFONE: ";
@@ -128,10 +130,14 @@ void Menu::agendarPaciente()
     {
         cout << "Telefone inválido. Digite novamente: ";
         getline(cin >> ws, telefone);
+        
     }
+    paciente[pos].setTelefone(telefone);
+
     cout << "Convênio ou Particular" << endl;
     cout << "(1-Particular, 0-Convenio): ";
     cin >> tipoInt;
+    paciente[pos].setPagamento(tipoInt);
   
     int dia, mes, ano;
     bool dataValida = false;
@@ -197,16 +203,14 @@ void Menu::agendarPaciente()
            !isdigit(horario[3]) || !isdigit(horario[4]))
     {
         cout << "Horário inválido. Digite novamente (formato HH:MM): ";
-        getline(cin, horario);
+        getline(cin >> ws, horario);
     }
     cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): " << endl;
     cin >> consulta;
     cin.ignore();
-    paciente[acharPosicao()].setNome(nomeP);
-    paciente[acharPosicao()].setcpf(cpf);
-    paciente[acharPosicao()].setIdade(idadeP);
-    paciente[acharPosicao()].setPagamento(tipoInt);
-    paciente[acharPosicao()].setTelefone(telefone);
+
+
+
     //implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
 }
 void Menu::excluirPaciente()
@@ -234,17 +238,18 @@ void Menu::excluirPaciente()
 }
 void Menu::listarPaciente()
 {
-
+    bool encontrado = false;
     int cond = 0;
     cout << "Listar todos[0]" << endl << "Listar apenas um paciente[1]" << endl;
     cin >> cond;
-    if(cond == 1){
+    if(cond == 0){
     cout << "Lista de pacientes:\n";
     for (int i = 0; i < 100; i++)
     {
         // Supondo que getNome() retorna uma string não vazia para pacientes cadastrados
         if (!paciente[i].getNome().empty())
         {
+            encontrado = true;
             cout << "Nome: " << paciente[i].getNome() << endl;
             cout << "CPF: " << paciente[i].getcpf() << endl;
             cout << "Idade: " << paciente[i].getIdade() << endl;
@@ -252,7 +257,7 @@ void Menu::listarPaciente()
             cout << "------------------------" << endl;
         }
     }
-} else if(cond == 0){
+} else if(cond == 1){
     cout << "Digite o CPF do Paciente: " << endl;
     string cpfbusca = "";
     getline(cin >> ws, cpfbusca);

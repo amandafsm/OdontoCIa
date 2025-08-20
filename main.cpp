@@ -1,5 +1,5 @@
 #include "crud.hpp"
-#pragma once
+using namespace std;
 
 int main()
 {
