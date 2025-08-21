@@ -5,6 +5,7 @@ int main()
 {
     int opcao;
     Menu m1;
+    m1.carregarPacientes();
 
     do
     {
@@ -16,6 +17,12 @@ int main()
         cout << "5. Sair\n";
         cout << "Escolha uma opção: ";
         cin >> opcao;
+        if (cin.fail())
+        {
+            cin.clear();                                                   // limpa o estado de erro
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // descarta a entrada inválida
+            opcao = -1;                                                    // força opção inválida
+        }
 
         switch (opcao)
         {
@@ -33,6 +40,7 @@ int main()
             break;
         case 5:
             cout << "Saindo...\n";
+            // função salvarBackup();
             break;
         default:
             cout << "Opção inválida!\n";

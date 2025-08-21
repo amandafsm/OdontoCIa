@@ -1,4 +1,6 @@
 #include "Paciente.hpp"
+#include <fstream>
+#include <sstream>
 #pragma once
 
 using namespace std;
@@ -11,16 +13,51 @@ protected:
     int totalpac;
 
 public:
+    void carregarPacientes();
     void agendarPaciente();
     void editarPaciente();
-    void excluirPaciente ();
-    void listarPaciente ();
+    void excluirPaciente();
+    void listarPaciente();
     int acharPosicao();
 };
+void Menu::carregarPacientes()
+{
 
-int Menu::acharPosicao(){
-    for(int i = 0; i < 100; i++){
-        if(paciente[i].getNome() == ""){
+    ifstream arquivo("backup.txt");
+    if (!arquivo.is_open())
+    {
+        cout << "Erro ao abrir o arquivo!" << endl;
+    }
+
+    string linha;
+    while (getline(arquivo, linha))
+    { // lê linha por linha
+        stringstream ss(linha);
+        int pos = acharPosicao();
+        string cpf, nome, idadeStr, conv, telefone;
+
+        getline(ss, nome, ';');
+        getline(ss, cpf, ';');
+        getline(ss, idadeStr, ';');
+        getline(ss, telefone, ';');
+        getline(ss, conv, ';');
+
+        int idade = stoi(idadeStr); // converter string para int.
+        int pag = stoi(conv);
+
+        paciente[pos].setNome(nome);
+        paciente[pos].setcpf(cpf);
+        paciente[pos].setIdade(idade);
+        paciente[pos].setTelefone(telefone);
+        // Falta colocar as variáveis e as funções de salvar em consulta.
+    }
+}
+int Menu::acharPosicao()
+{
+    for (int i = 0; i < 100; i++)
+    {
+        if (paciente[i].getNome() == "")
+        {
             return i;
         }
     }
@@ -112,16 +149,16 @@ void Menu::agendarPaciente()
     paciente[pos].setIdade(idadeP);
 
     // Peso do paciente
-//    cout << "PESO: ";
-//    cin >> peso;
-//    while (cin.fail() || peso <= 0 || peso > 200)
-//    {
-//        cin.clear();
-//        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-//        cout << "Peso inválido. Digite novamente: ";
-//        cin >> peso;
-//    }
-//    cin.ignore();
+    //    cout << "PESO: ";
+    //    cin >> peso;
+    //    while (cin.fail() || peso <= 0 || peso > 200)
+    //    {
+    //        cin.clear();
+    //        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //        cout << "Peso inválido. Digite novamente: ";
+    //        cin >> peso;
+    //    }
+    //    cin.ignore();
 
     // Telefone
     cout << "TELEFONE: ";
@@ -130,7 +167,6 @@ void Menu::agendarPaciente()
     {
         cout << "Telefone inválido. Digite novamente: ";
         getline(cin >> ws, telefone);
-        
     }
     paciente[pos].setTelefone(telefone);
 
@@ -138,7 +174,7 @@ void Menu::agendarPaciente()
     cout << "(1-Particular, 0-Convenio): ";
     cin >> tipoInt;
     paciente[pos].setPagamento(tipoInt);
-  
+
     int dia, mes, ano;
     bool dataValida = false;
     while (!dataValida)
@@ -209,9 +245,7 @@ void Menu::agendarPaciente()
     cin >> consulta;
     cin.ignore();
 
-
-
-    //implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
+    // implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
 }
 void Menu::excluirPaciente()
 {
@@ -240,41 +274,45 @@ void Menu::listarPaciente()
 {
     bool encontrado = false;
     int cond = 0;
-    cout << "Listar todos[0]" << endl << "Listar apenas um paciente[1]" << endl;
+    cout << "Listar todos[0]" << endl
+         << "Listar apenas um paciente[1]" << endl;
     cin >> cond;
-    if(cond == 0){
-    cout << "Lista de pacientes:\n";
-    for (int i = 0; i < 100; i++)
+    if (cond == 0)
     {
-        // Supondo que getNome() retorna uma string não vazia para pacientes cadastrados
-        if (!paciente[i].getNome().empty())
+        cout << "Lista de pacientes:\n";
+        for (int i = 0; i < 100; i++)
         {
-            encontrado = true;
-            cout << "Nome: " << paciente[i].getNome() << endl;
-            cout << "CPF: " << paciente[i].getcpf() << endl;
-            cout << "Idade: " << paciente[i].getIdade() << endl;
-            cout << "Telefone: " << paciente[i].getTelefone() << endl;
-            cout << "------------------------" << endl;
+            // Supondo que getNome() retorna uma string não vazia para pacientes cadastrados
+            if (!paciente[i].getNome().empty())
+            {
+                encontrado = true;
+                cout << "Nome: " << paciente[i].getNome() << endl;
+                cout << "CPF: " << paciente[i].getcpf() << endl;
+                cout << "Idade: " << paciente[i].getIdade() << endl;
+                cout << "Telefone: " << paciente[i].getTelefone() << endl;
+                cout << "------------------------" << endl;
+            }
         }
     }
-} else if(cond == 1){
-    cout << "Digite o CPF do Paciente: " << endl;
-    string cpfbusca = "";
-    getline(cin >> ws, cpfbusca);
-    for(int i = 0; i < 100; i++){
-        if(paciente[i].getcpf() == cpfbusca){
-            cout << "Nome: " << paciente[i].getNome() << endl;
-            cout << "CPF: " << paciente[i].getcpf() << endl;
-            cout << "Idade: " << paciente[i].getIdade() << endl;
-            cout << "Telefone: " << paciente[i].getTelefone() << endl;
-            cout << "------------------------" << endl;
-        } else{
-            continue;
+    else if (cond == 1)
+    {
+        cout << "Digite o CPF do Paciente: " << endl;
+        string cpfbusca = "";
+        getline(cin >> ws, cpfbusca);
+        for (int i = 0; i < 100; i++)
+        {
+            if (paciente[i].getcpf() == cpfbusca)
+            {
+                cout << "Nome: " << paciente[i].getNome() << endl;
+                cout << "CPF: " << paciente[i].getcpf() << endl;
+                cout << "Idade: " << paciente[i].getIdade() << endl;
+                cout << "Telefone: " << paciente[i].getTelefone() << endl;
+                cout << "------------------------" << endl;
+            }
+            else
+            {
+                continue;
+            }
         }
     }
-
 }
-
-}
-
-
