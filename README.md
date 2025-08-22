@@ -3,9 +3,6 @@ Projeto 01 para a disciplina de Laboratório de Linguagem da Programação I - S
 
 SISTEMA CRUD - CONSULTÓRIO ODONTOLOGICO
 
-INTERFACE HTML E CSS
-      LOGIN
-      SENHA
 MENU
       AGENDAMENTOS
       EXCLUIR 
@@ -25,10 +22,6 @@ AGENDAMENTOS
       CONVENIO [] sim [] não
       PARTICULAR [] sim [] não
       
-MÉDICO
-      NOME
-      IDADE
-      ESPECIALIZAÇÃO
     
 CONSULTAS
       [] RESTAURAÇÃO
@@ -36,11 +29,15 @@ CONSULTAS
       [] ORTODONTIA
       [] LIMPEZA
       [] EXAMES DE ROTINA
-      PARECER MÉDICO/DATA DO PROCEDIMENTO
 
 
+COMANDO PARA RODAR O PROGRAMA 
 
+LINUX 
+g++ -o main main.cpp
+./main 
 
+WINDOWS 
+g++ main.cpp -o exe 
+./main 
 
-
-Teste

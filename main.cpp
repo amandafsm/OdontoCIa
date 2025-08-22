@@ -9,7 +9,7 @@ int main()
 
     do
     {
-        cout << "\n--- Menu ---\n";
+        cout << "\n««««««« Menu »»»»»»»\n";
         cout << "1. Agendar Paciente\n";
         cout << "2. Editar Paciente\n";
         cout << "3. Excluir Paciente\n";

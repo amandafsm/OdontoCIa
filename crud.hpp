@@ -23,7 +23,7 @@ public:
 void Menu::carregarPacientes()
 {
 
-    ifstream arquivo("backup.txt");
+    ifstream arquivo("./backup.txt");
     if (!arquivo.is_open())
     {
         cout << "Erro ao abrir o arquivo!" << endl;
