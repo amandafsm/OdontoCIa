@@ -245,7 +245,7 @@ void Menu::agendarPaciente()
     cin >> consulta;
     cin.ignore();
 
-    // implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
+    //aa implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
 }
 void Menu::excluirPaciente()
 {
