@@ -1,6 +1,9 @@
 #include "crud.hpp"
 using namespace std;
 
+
+// Organizar a inicialização do programa e organizar o menu principal!!!
+
 int main()
 {
     int opcao;
@@ -19,9 +22,9 @@ int main()
         cin >> opcao;
         if (cin.fail())
         {
-            cin.clear();                                                   // limpa o estado de erro
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // descarta a entrada inválida
-            opcao = -1;                                                    // força opção inválida
+            cin.clear();                                                   
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            opcao = -1;                                                   
         }
 
         switch (opcao)
@@ -40,7 +43,6 @@ int main()
             break;
         case 5:
             cout << "Saindo...\n";
-            // função salvarBackup();
             break;
         default:
             cout << "Opção inválida!\n";

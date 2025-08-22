@@ -6,6 +6,14 @@
 
 using namespace std;
 
+// enum de médico 
+// verificar se já tem todos atributos necessários
+// gerar relatorio (geral, consultas, medicos)
+// fazer diagrama (ultimo)
+// verificar se existe polimorfismo 
+// metodo para subscrever 
+
+
 // Classe Pessoa
 class Pessoa
 {
