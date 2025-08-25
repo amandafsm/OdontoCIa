@@ -123,7 +123,7 @@ void Menu::agendarPaciente()
 {
     string nomeP, telefone, data, horario, cpf;
     float peso;
-    int idadeP, idadeM, tipoInt, consulta;
+    int idadeP, idadeM, tipoInt, tipoConsulta;
     int pos = 0;
     pos = acharPosicao();
     //  Nome do paciente
@@ -242,11 +242,19 @@ void Menu::agendarPaciente()
         getline(cin >> ws, horario);
     }
     cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): " << endl;
-    cin >> consulta;
+    cin >> tipoConsulta;
+    while (cin.fail() || tipoConsulta < 0 || tipoConsulta > 4)
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Tipo de consulta inválido. Digite novamente (0-4): ";
+        cin >> tipoConsulta;
+    }
     cin.ignore();
 
-    //aa implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
-            
+    consulta[pos].setTipodeConsulta(static_cast<TipodeConsulta>(tipoConsulta));
+    cout << "Paciente cadastrado com sucesso!\n";
+
 }
 
 void Menu::excluirPaciente()
