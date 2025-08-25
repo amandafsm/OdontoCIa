@@ -345,6 +345,7 @@ void Menu::listarPaciente()
         }
     }
 }
+
 void Menu::relatorioPaciente()
 {
     ofstream arquivo("relatorio_pacientes.txt");

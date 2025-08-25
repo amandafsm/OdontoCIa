@@ -56,11 +56,11 @@ int main()
             m1.agendarPaciente();
             break;
         case 2:
-            cout << "✏ Editar Paciente\n";
+            cout << "✏️ Editar Paciente\n";
             m1.editarPaciente();
             break;
         case 3:
-            cout << "🗑 Excluir Paciente\n";
+            cout << "🗑️ Excluir Paciente\n";
             m1.excluirPaciente();
             break;
         case 4:

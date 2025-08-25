@@ -30,14 +30,3 @@ CONSULTAS
       [] LIMPEZA
       [] EXAMES DE ROTINA
 
-
-COMANDO PARA RODAR O PROGRAMA 
-
-LINUX 
-g++ -o main main.cpp
-./main 
-
-WINDOWS 
-g++ main.cpp -o exe 
-./main 
-
