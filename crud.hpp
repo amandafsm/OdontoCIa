@@ -246,7 +246,9 @@ void Menu::agendarPaciente()
     cin.ignore();
 
     //aa implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
+            
 }
+
 void Menu::excluirPaciente()
 {
     string cpfBusca;
@@ -290,6 +292,18 @@ void Menu::listarPaciente()
                 cout << "CPF: " << paciente[i].getcpf() << endl;
                 cout << "Idade: " << paciente[i].getIdade() << endl;
                 cout << "Telefone: " << paciente[i].getTelefone() << endl;
+                // Converte o tipo de consulta para string antes de imprimir
+                int tipoConsulta = static_cast<int>(consulta[i].getTipodeConsulta());
+                string tipoConsultaStr;
+                switch (tipoConsulta) {
+                    case 0: tipoConsultaStr = "RESTAURACAO"; break;
+                    case 1: tipoConsultaStr = "CLAREAMENTO"; break;
+                    case 2: tipoConsultaStr = "ORTODONTIA"; break;
+                    case 3: tipoConsultaStr = "LIMPEZA"; break;
+                    case 4: tipoConsultaStr = "EXAMES_ROTINA"; break;
+                    default: tipoConsultaStr = "DESCONHECIDO"; break;
+                }
+                cout << "Tipo de Consulta: " << tipoConsultaStr << endl;
                 cout << "------------------------" << endl;
             }
         }
