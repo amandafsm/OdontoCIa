@@ -13,11 +13,18 @@ protected:
     int totalpac;
 
 public:
+    Menu() : totalpac(0) {
+        for(int i = 0; i < 100; i++) {
+            paciente[i] = Paciente();
+            consulta[i] = Consulta();
+        }
+    }
     void carregarPacientes();
     void agendarPaciente();
     void editarPaciente();
     void excluirPaciente();
     void listarPaciente();
+    void relatorioPaciente();
     int acharPosicao();
 };
 void Menu::carregarPacientes()
@@ -123,7 +130,7 @@ void Menu::agendarPaciente()
 {
     string nomeP, telefone, data, horario, cpf;
     float peso;
-    int idadeP, idadeM, tipoInt, consulta;
+    int idadeP, idadeM, tipoInt, tipoConsulta;
     int pos = 0;
     pos = acharPosicao();
     //  Nome do paciente
@@ -242,11 +249,21 @@ void Menu::agendarPaciente()
         getline(cin >> ws, horario);
     }
     cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): " << endl;
-    cin >> consulta;
+    cin >> tipoConsulta;
+    while (cin.fail() || tipoConsulta < 0 || tipoConsulta > 4)
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Tipo de consulta inválido. Digite novamente (0-4): ";
+        cin >> tipoConsulta;
+    }
     cin.ignore();
 
-    //aa implementa as funções de setar as variaveis de consulta, pode fazer igual eu fiz, a função achar posição vai indicar o primeiro indicie de paciente vazio.
+    consulta[pos].setTipodeConsulta(static_cast<TipodeConsulta>(tipoConsulta));
+    cout << "Paciente cadastrado com sucesso!\n";
+
 }
+
 void Menu::excluirPaciente()
 {
     string cpfBusca;
@@ -290,6 +307,18 @@ void Menu::listarPaciente()
                 cout << "CPF: " << paciente[i].getcpf() << endl;
                 cout << "Idade: " << paciente[i].getIdade() << endl;
                 cout << "Telefone: " << paciente[i].getTelefone() << endl;
+                // Converte o tipo de consulta para string antes de imprimir
+                int tipoConsulta = static_cast<int>(consulta[i].getTipodeConsulta());
+                string tipoConsultaStr;
+                switch (tipoConsulta) {
+                    case 0: tipoConsultaStr = "RESTAURACAO"; break;
+                    case 1: tipoConsultaStr = "CLAREAMENTO"; break;
+                    case 2: tipoConsultaStr = "ORTODONTIA"; break;
+                    case 3: tipoConsultaStr = "LIMPEZA"; break;
+                    case 4: tipoConsultaStr = "EXAMES_ROTINA"; break;
+                    default: tipoConsultaStr = "DESCONHECIDO"; break;
+                }
+                cout << "Tipo de Consulta: " << tipoConsultaStr << endl;
                 cout << "------------------------" << endl;
             }
         }
@@ -315,4 +344,42 @@ void Menu::listarPaciente()
             }
         }
     }
+}
+void Menu::relatorioPaciente()
+{
+    ofstream arquivo("relatorio_pacientes.txt");
+    if (!arquivo.is_open())
+    {
+        cout << "Erro ao abrir o arquivo para escrita!" << endl;
+        return;
+    }
+
+    // Cabeçalho do relatório
+    arquivo << "=========================================\n";
+    arquivo << "         RELATÓRIO DE PACIENTES         \n";
+    arquivo << "=========================================\n\n";
+
+    // Lista de pacientes
+    int count = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        if (!paciente[i].getNome().empty())
+        {
+            count++;
+            arquivo << "PACIENTE #" << count << "\n";
+            arquivo << "Nome: " << paciente[i].getNome() << "\n";
+            arquivo << "CPF: " << paciente[i].getcpf() << "\n";
+            arquivo << "Idade: " << paciente[i].getIdade() << "\n";
+            arquivo << "Telefone: " << paciente[i].getTelefone() << "\n";
+            arquivo << "-----------------------------------------\n";
+        }
+    }
+
+    // Rodapé do relatório
+    arquivo << "\nTotal de pacientes: " << count << "\n";
+    arquivo << "=========================================\n";
+
+    arquivo.close();
+    cout << "Relatório gerado com sucesso em 'relatorio_pacientes.txt'!\n";
+    cout << "Total de pacientes registrados: " << count << endl;
 }
