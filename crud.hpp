@@ -13,11 +13,18 @@ protected:
     int totalpac;
 
 public:
+    Menu() : totalpac(0) {
+        for(int i = 0; i < 100; i++) {
+            paciente[i] = Paciente();
+            consulta[i] = Consulta();
+        }
+    }
     void carregarPacientes();
     void agendarPaciente();
     void editarPaciente();
     void excluirPaciente();
     void listarPaciente();
+    void relatorioPaciente();
     int acharPosicao();
 };
 void Menu::carregarPacientes()
@@ -337,4 +344,43 @@ void Menu::listarPaciente()
             }
         }
     }
+}
+
+void Menu::relatorioPaciente()
+{
+    ofstream arquivo("relatorio_pacientes.txt");
+    if (!arquivo.is_open())
+    {
+        cout << "Erro ao abrir o arquivo para escrita!" << endl;
+        return;
+    }
+
+    // Cabeçalho do relatório
+    arquivo << "=========================================\n";
+    arquivo << "         RELATÓRIO DE PACIENTES         \n";
+    arquivo << "=========================================\n\n";
+
+    // Lista de pacientes
+    int count = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        if (!paciente[i].getNome().empty())
+        {
+            count++;
+            arquivo << "PACIENTE #" << count << "\n";
+            arquivo << "Nome: " << paciente[i].getNome() << "\n";
+            arquivo << "CPF: " << paciente[i].getcpf() << "\n";
+            arquivo << "Idade: " << paciente[i].getIdade() << "\n";
+            arquivo << "Telefone: " << paciente[i].getTelefone() << "\n";
+            arquivo << "-----------------------------------------\n";
+        }
+    }
+
+    // Rodapé do relatório
+    arquivo << "\nTotal de pacientes: " << count << "\n";
+    arquivo << "=========================================\n";
+
+    arquivo.close();
+    cout << "Relatório gerado com sucesso em 'relatorio_pacientes.txt'!\n";
+    cout << "Total de pacientes registrados: " << count << endl;
 }

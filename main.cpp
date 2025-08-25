@@ -22,7 +22,7 @@ void exibirMenu()
     cout << " [2] ➝ Editar Paciente\n";
     cout << " [3] ➝ Excluir Paciente\n";
     cout << " [4] ➝ Listar Pacientes\n";
-    cout << " [5] ➝ Gerar Relatório de Pacientes\n";
+    cout << " [5] ➝ Gerar Relatório\n";
     cout << " [6] ➝ Sair\n";
     cout << "-----------------------------------------\n";
     cout << " Escolha uma opção: ";
@@ -67,21 +67,25 @@ int main()
             cout << "📋 Lista de Pacientes\n";
             m1.listarPaciente();
             break;
-        case 5:
+         case 5:
+            cout << "📋 Gerar Relatório\n";
+            m1.relatorioPaciente();
+            break;
+        case 6:
             cout << "🚪 Saindo do sistema...\n";
             break;
         default:
             cout << "❌ Opção inválida! Tente novamente.\n";
         }
 
-        if (opcao != 5)
+        if (opcao != 6)
         {
             cout << "\nPressione ENTER para continuar...";
             cin.ignore();
             cin.get();
         }
 
-    } while (opcao != 5);
+    } while (opcao != 6);
 
     return 0;
 }
