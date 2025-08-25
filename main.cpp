@@ -3,7 +3,7 @@
 #include <limits>
 using namespace std;
 
-// Função para limpar a tela (Windows/Linux)
+// Função para limpar a tela 
 void limparTela()
 {
 #ifdef _WIN32
@@ -13,7 +13,6 @@ void limparTela()
 #endif
 }
 
-// Função para exibir o menu estilizado
 void exibirMenu()
 {
     cout << "\n=========================================\n";
@@ -23,7 +22,8 @@ void exibirMenu()
     cout << " [2] ➝ Editar Paciente\n";
     cout << " [3] ➝ Excluir Paciente\n";
     cout << " [4] ➝ Listar Pacientes\n";
-    cout << " [5] ➝ Sair\n";
+    cout << " [5] ➝ Gerar Relatório de Pacientes\n";
+    cout << " [6] ➝ Sair\n";
     cout << "-----------------------------------------\n";
     cout << " Escolha uma opção: ";
 }
