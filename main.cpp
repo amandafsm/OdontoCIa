@@ -73,6 +73,7 @@ int main()
             break;
         case 6:
             cout << "🚪 Saindo do sistema...\n";
+            m1.salvarPrograma();
             break;
         default:
             cout << "❌ Opção inválida! Tente novamente.\n";
@@ -87,5 +88,5 @@ int main()
 
     } while (opcao != 6);
 
-        return 0;
+    return 0;
 }

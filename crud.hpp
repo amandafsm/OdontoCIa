@@ -26,7 +26,26 @@ public:
     void listarPaciente();
     void relatorioPaciente();
     int acharPosicao();
+    void salvarPrograma();
 };
+
+void Menu::salvarPrograma()
+{
+    ofstream arquivo("backup.txt", ios::out);
+
+if (!arquivo.is_open())
+{
+    cout << "Erro ao abrir o arquivo!" << endl;
+}
+// Escrever apenas os elementos realmente usados
+for (int i = 0; i < acharPosicao(); i++) {
+    arquivo << paciente[i].getNome() << ";"
+            << paciente[i].getcpf() << ";"
+            << paciente[i].getIdade() << ";" << paciente[i].getTelefone() << endl;
+}
+
+    arquivo.close();
+}
 void Menu::carregarPacientes()
 {
 
@@ -41,16 +60,16 @@ void Menu::carregarPacientes()
     { // lê linha por linha
         stringstream ss(linha);
         int pos = acharPosicao();
-        string cpf, nome, idadeStr, conv, telefone;
+        string cpf, nome, idadeSt, conv, telefone;
 
         getline(ss, nome, ';');
         getline(ss, cpf, ';');
-        getline(ss, idadeStr, ';');
+        getline(ss, idadeSt, ';');
         getline(ss, telefone, ';');
         getline(ss, conv, ';');
 
-        int idade = stoi(idadeStr); // converter string para int.
-        int pag = stoi(conv);
+        int idade = stoi(idadeSt); // converter string para int.
+        //int pag = stoi(conv);
 
         paciente[pos].setNome(nome);
         paciente[pos].setcpf(cpf);
@@ -107,7 +126,7 @@ void Menu::editarPaciente()
             cin >> novoParticular;
             paciente[i].setPagamento(novoParticular);
 
-            // salvarEmArquivo(); // Implemente esta função conforme necessário
+            salvarPrograma();
             cout << "Paciente editado com sucesso!\n";
             break;
         }
