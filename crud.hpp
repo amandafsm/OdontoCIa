@@ -1,6 +1,7 @@
 #include "Paciente.hpp"
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 #pragma once
 
 using namespace std;
@@ -48,36 +49,54 @@ for (int i = 0; i < acharPosicao(); i++) {
 }
 void Menu::carregarPacientes()
 {
-
     ifstream arquivo("./backup.txt");
     if (!arquivo.is_open())
     {
         cout << "Erro ao abrir o arquivo!" << endl;
+        return;
     }
 
     string linha;
     while (getline(arquivo, linha))
-    { // lê linha por linha
+    { 
         stringstream ss(linha);
-        int pos = acharPosicao();
-        string cpf, nome, idadeSt, conv, telefone;
+        string cpf, nome, pesoS, idadeSt, conv, telefone;
+        int idade = 0;
+        float peso = 0.0;
+        int convenio = 0;
 
         getline(ss, nome, ';');
         getline(ss, cpf, ';');
         getline(ss, idadeSt, ';');
         getline(ss, telefone, ';');
-        getline(ss, conv, ';');
+        getline(ss, pesoS, ';');
+        getline(ss, conv);
 
-        int idade = stoi(idadeSt); // converter string para int.
-        //int pag = stoi(conv);
+        try {
+            idade = stoi(idadeSt);
+            peso = stof(pesoS);
+            convenio = stoi(conv);
+        } catch (...) {
+            cout << "Erro na conversão da linha: " << linha << endl;
+            continue; // pula linha inválida
+        }
 
+        // --- Pega a posição livre ---
+        int pos = acharPosicao();
+
+        // --- Atualiza paciente no vetor ---
         paciente[pos].setNome(nome);
         paciente[pos].setcpf(cpf);
         paciente[pos].setIdade(idade);
         paciente[pos].setTelefone(telefone);
-        // Falta colocar as variáveis e as funções de salvar em consulta.
+        paciente[pos].setPeso(peso);
+        paciente[pos].setPagamento(convenio);
     }
+
+    arquivo.close();
 }
+
+
 int Menu::acharPosicao()
 {
     for (int i = 0; i < 100; i++)
@@ -174,17 +193,10 @@ void Menu::agendarPaciente()
     cin.ignore();
     paciente[pos].setIdade(idadeP);
 
-    // Peso do paciente
-    //    cout << "PESO: ";
-    //    cin >> peso;
-    //    while (cin.fail() || peso <= 0 || peso > 200)
-    //    {
-    //        cin.clear();
-    //        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //        cout << "Peso inválido. Digite novamente: ";
-    //        cin >> peso;
-    //    }
-    //    cin.ignore();
+        cout << "PESO: ";
+        cin >> peso;
+        paciente[pos].setPeso(peso);
+        cin.ignore();
 
     // Telefone
     cout << "TELEFONE: ";
@@ -326,6 +338,7 @@ void Menu::listarPaciente()
                 cout << "CPF: " << paciente[i].getcpf() << endl;
                 cout << "Idade: " << paciente[i].getIdade() << endl;
                 cout << "Telefone: " << paciente[i].getTelefone() << endl;
+                cout << "Peso: " << paciente[i].getPeso() << endl;
                 // Converte o tipo de consulta para string antes de imprimir
                 int tipoConsulta = static_cast<int>(consulta[i].getTipodeConsulta());
                 string tipoConsultaStr;
@@ -388,9 +401,17 @@ void Menu::relatorioPaciente()
             count++;
             arquivo << "PACIENTE #" << count << "\n";
             arquivo << "Nome: " << paciente[i].getNome() << "\n";
-            arquivo << "CPF: " << paciente[i].getcpf() << "\n";
+            string cpf = paciente[i].getcpf().substr(0, 3) + "." +
+          paciente[i].getcpf().substr(3, 3) + "." +
+          paciente[i].getcpf().substr(6, 3) + "-" +
+          paciente[i].getcpf().substr(9, 2);
+            arquivo << "CPF: " << cpf << "\n";
             arquivo << "Idade: " << paciente[i].getIdade() << "\n";
-            arquivo << "Telefone: " << paciente[i].getTelefone() << "\n";
+            string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +   
+                paciente[i].getTelefone().substr(2, 5) + "-" +          
+                paciente[i].getTelefone().substr(7, 4); 
+            arquivo << "Telefone: " << telefone << "\n";
+            arquivo << "Peso:" << fixed << setprecision(2) << paciente[i].getPeso() << " Kg \n";   
             arquivo << "-----------------------------------------\n";
         }
     }

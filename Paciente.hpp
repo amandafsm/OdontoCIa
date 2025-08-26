@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <algorithm>
 #pragma once
 
 using namespace std;
@@ -22,34 +23,36 @@ private:
     string nome;
     int idade;
     string cpf;
+    float peso;
 
 public:
     Pessoa(string n = "", int i = 0) : nome(n), idade(i) {}
     void setcpf(string c);
     void setNome(string n);
     void setIdade(int i);
+    void setPeso(float p);
     string getcpf() { return cpf; }
     string getNome() { return nome; }
     int getIdade() { return idade; }
+    float getPeso(){ return peso;}
 };
+void Pessoa::setPeso(float p){
+    while (cin.fail() || p <= 0 || p > 200)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Peso inválido. Digite novamente: ";
+            cin >> p;
+        }
+        peso = p;
+    }
 void Pessoa::setcpf(string c)
 {
-    if (c.empty())
-    {
-        while (c.empty())
-        {
-            cout << "Nome não pode ser vazio. Digite novamente: ";
-            getline(cin >> ws, c);
-        }
+    while (c.length() != 11) {
+        cout << "CPF inválido. Exemplo: '12345678911'\nDigite novamente: ";
+        getline(cin >> ws, c);
     }
-    if (c.length() < 11)
-    {
-        while (c.empty())
-        {
-            cout << "Cpf não pode ter menos de 11 caracteres. Digite novamente: ";
-            getline(cin >> ws, c);
-        }
-    }
+
     cpf = c;
 }
 
@@ -92,14 +95,21 @@ public:
     Paciente(string n = "", int i = 0, string t = "", bool c = false, bool p = false)
         : Pessoa(n, i), telefone(t), convenio(c), particular(p) {}
 
-    void setTelefone(string t) { telefone = t; }
+    void setTelefone(string t);
     void setPagamento(int i);
 
     string getTelefone() const { return telefone; }
     bool getConvenio() const { return convenio; }
     bool getParticular() const { return particular; }
 };
+void Paciente::setTelefone(string t) {
+    while (t.length() != 11) {
+        cout << "Telefone inválido. Exemplo: '83912345678'\nDigite novamente: ";
+        getline(cin >> ws, t);
+    }
 
+    telefone = t;
+}
 void Paciente::setPagamento(int i)
 {
     if (i == 0)

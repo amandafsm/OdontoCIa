@@ -6,67 +6,78 @@ PACIENTE #1
 Nome: João Silva
 CPF: 123.456.789-00
 Idade: 34
-Telefone: 11987654321
+Telefone: (11) 98765-4321
+Peso:112.00 Kg 
 -----------------------------------------
 PACIENTE #2
 Nome: Maria Souza
 CPF: 987.654.321-11
 Idade: 28
-Telefone: 21987654321
+Telefone: (21) 98765-4321
+Peso:105.00 Kg 
 -----------------------------------------
 PACIENTE #3
 Nome: Carlos Pereira
 CPF: 456.789.123-22
 Idade: 45
-Telefone: 31987654321
+Telefone: (31) 98765-4321
+Peso:70.00 Kg 
 -----------------------------------------
 PACIENTE #4
 Nome: Ana Oliveira
 CPF: 321.654.987-33
 Idade: 52
-Telefone: 41987654321
+Telefone: (41) 98765-4321
+Peso:66.00 Kg 
 -----------------------------------------
 PACIENTE #5
 Nome: Fernanda Lima
 CPF: 789.123.456-44
 Idade: 39
-Telefone: 51987654321
+Telefone: (51) 98765-4321
+Peso:95.00 Kg 
 -----------------------------------------
 PACIENTE #6
 Nome: Paulo Mendes
 CPF: 654.321.789-55
 Idade: 23
-Telefone: 61987654321
+Telefone: (61) 98765-4321
+Peso:69.00 Kg 
 -----------------------------------------
 PACIENTE #7
 Nome: Juliana Costa
 CPF: 852.963.741-66
 Idade: 31
-Telefone: 71987654321
+Telefone: (71) 98765-4321
+Peso:101.00 Kg 
 -----------------------------------------
 PACIENTE #8
 Nome: Ricardo Alves
 CPF: 147.258.369-77
 Idade: 60
-Telefone: 81987654321
+Telefone: (81) 98765-4321
+Peso:60.00 Kg 
 -----------------------------------------
 PACIENTE #9
 Nome: Patrícia Ramos
 CPF: 369.147.258-88
 Idade: 27
-Telefone: 91987654321
+Telefone: (91) 98765-4321
+Peso:117.00 Kg 
 -----------------------------------------
 PACIENTE #10
 Nome: Eduardo Martins
 CPF: 258.369.147-99
 Idade: 41
-Telefone: 11912345678
+Telefone: (11) 91234-5678
+Peso:112.00 Kg 
 -----------------------------------------
 PACIENTE #11
 Nome: joe
-CPF: 13722842492
+CPF: 137.228.424-92
 Idade: 20
-Telefone: 83986581268
+Telefone: (83) 98658-1268
+Peso:68.00 Kg 
 -----------------------------------------
 
 Total de pacientes: 11
