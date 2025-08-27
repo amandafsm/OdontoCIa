@@ -1,10 +1,9 @@
 #include "crud.hpp"
-#include <iostream>
-#include <limits>
+
 using namespace std;
 
-// Função para limpar a tela 
-void limparTela()
+// Função para limpar a tela
+ void limparTela()
 {
 #ifdef _WIN32
     system("cls");
@@ -12,6 +11,7 @@ void limparTela()
     system("clear");
 #endif
 }
+
 
 void exibirMenu()
 {
@@ -32,7 +32,7 @@ int main()
 {
     int opcao;
     Menu m1;
-    m1.carregarPacientes();
+    m1.carregarPrograma();
 
     do
     {

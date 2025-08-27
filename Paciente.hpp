@@ -3,6 +3,7 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
+
 #pragma once
 
 using namespace std;
@@ -19,7 +20,7 @@ using namespace std;
 class Pessoa
 {
 
-private:
+protected:
     string nome;
     int idade;
     string cpf;
@@ -27,26 +28,53 @@ private:
 
 public:
     Pessoa(string n = "", int i = 0) : nome(n), idade(i) {}
-    void setcpf(string c);
-    void setNome(string n);
-    void setIdade(int i);
-    void setPeso(float p);
+    virtual void setcpf(string c) = 0;
+    virtual void setNome(string n) = 0;
+    virtual void setIdade(int i) = 0;
+    virtual void setPeso(float p) = 0;
     string getcpf() { return cpf; }
     string getNome() { return nome; }
     int getIdade() { return idade; }
     float getPeso(){ return peso;}
 };
-void Pessoa::setPeso(float p){
+
+
+// Classe Paciente
+class Paciente : public Pessoa
+{
+private:
+    string telefone;
+    bool convenio;
+    bool particular;
+
+public:
+    Paciente(string n = "", int i = 0, string t = "", bool c = false, bool p = false)
+        : Pessoa(n, i), telefone(t), convenio(c), particular(p) {}
+
+    void setPeso(float p);
+    void setcpf(string c);
+    void setNome(string n);
+    void setIdade(int i);
+    void setTelefone(string t);
+    void setPagamento(int i);
+
+    string getTelefone() const { return telefone; }
+    int getPagamento();
+    string getPagamentoStr();
+    bool getParticular() const { return particular; }
+};
+
+void Paciente::setPeso(float p){
     while (cin.fail() || p <= 0 || p > 200)
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Peso inválido. Digite novamente: ";
+            cout << "Peso inválido. Exemplo: '0 até 200'" <<  "Digite novamente: ";
             cin >> p;
         }
         peso = p;
     }
-void Pessoa::setcpf(string c)
+void Paciente::setcpf(string c)
 {
     while (c.length() != 11) {
         cout << "CPF inválido. Exemplo: '12345678911'\nDigite novamente: ";
@@ -56,7 +84,7 @@ void Pessoa::setcpf(string c)
     cpf = c;
 }
 
-void Pessoa::setNome(string n)
+void Paciente::setNome(string n)
 {
     string temp = "";
     if (n.empty())
@@ -73,7 +101,7 @@ void Pessoa::setNome(string n)
         nome = n;
     }
 }
-void Pessoa::setIdade(int i)
+void Paciente::setIdade(int i)
 {
     if (i > 100)
     {
@@ -82,26 +110,21 @@ void Pessoa::setIdade(int i)
     }
     idade = i;
 }
+string Paciente::getPagamentoStr(){
+    if(convenio == true){
+        return "Convênio";
+    }else{
+        return "Particular";
+    }
+}
+int Paciente::getPagamento(){
+    if(convenio == true){
+        return 0;
+    }else{
+        return 1;
+    }
 
-// Classe Paciente
-class Paciente : public Pessoa
-{
-private:
-    string telefone;
-    bool convenio;
-    bool particular;
-
-public:
-    Paciente(string n = "", int i = 0, string t = "", bool c = false, bool p = false)
-        : Pessoa(n, i), telefone(t), convenio(c), particular(p) {}
-
-    void setTelefone(string t);
-    void setPagamento(int i);
-
-    string getTelefone() const { return telefone; }
-    bool getConvenio() const { return convenio; }
-    bool getParticular() const { return particular; }
-};
+}
 void Paciente::setTelefone(string t) {
     while (t.length() != 11) {
         cout << "Telefone inválido. Exemplo: '83912345678'\nDigite novamente: ";
@@ -139,7 +162,7 @@ class Consulta
 {
 private:
     Paciente paciente;
-    string medico[5];
+    string medico[5] = {"Mariana Lopes", "Ricardo Nogueira", "Camila Ferreira", "André Carvalho", "Beatriz Mendes"};
     string data;
     string horario;
     TipodeConsulta tipo;
@@ -163,8 +186,11 @@ public:
     string getData() const { return data; }
     string getHorario() const { return horario; }
     TipodeConsulta getTipodeConsulta() const { return tipo; }
+    int getConsulta(){ return static_cast<int>(tipo); }
     string getParecer() const { return parecer; }
     string getDataProcedimento() const { return dataProcedimento; }
+    string getmedico(int i); 
+    string corrigirHora(string h);
 
     static TipodeConsulta stringToTipodeConsulta(const string &t)
     {
@@ -181,3 +207,10 @@ public:
         return TipodeConsulta::RESTAURACAO;
     }
 };
+
+string Consulta::corrigirHora(string h){
+    string hora = h.substr(0, 2) + ":" +
+          h.substr(2, 2);
+          return hora;
+}
+string Consulta::getmedico(int i){ return medico[i]; }
