@@ -14,8 +14,10 @@ protected:
     int totalpac;
 
 public:
-    Menu() : totalpac(0) {
-        for(int i = 0; i < 100; i++) {
+    Menu() : totalpac(0)
+    {
+        for (int i = 0; i < 100; i++)
+        {
             paciente[i] = Paciente();
             consulta[i] = Consulta();
         }
@@ -34,20 +36,21 @@ void Menu::salvarPrograma()
 {
     ofstream arquivo("backup.txt", ios::out);
 
-if (!arquivo.is_open())
-{
-    cout << "Erro ao abrir o arquivo!" << endl;
-    return;
-}
-// Escrever apenas os elementos realmente usados
+    if (!arquivo.is_open())
+    {
+        cout << "Erro ao abrir o arquivo!" << endl;
+        return;
+    }
+    // Escrever apenas os elementos realmente usados
 
-for (int i = 0; i < acharPosicao(); i++) {
-    arquivo << paciente[i].getNome() << ";"
-            << paciente[i].getcpf() << ";"
-            << paciente[i].getIdade() << ";" << paciente[i].getTelefone() << ";" << paciente[i].getPeso() << ";" 
-            << paciente[i].getPagamento() << ";" << consulta[i].getData() 
-            << ";" << consulta[i].getHorario() << ";" << consulta[i].getConsulta() << endl;
-}
+    for (int i = 0; i < acharPosicao(); i++)
+    {
+        arquivo << paciente[i].getNome() << ";"
+                << paciente[i].getcpf() << ";"
+                << paciente[i].getIdade() << ";" << paciente[i].getTelefone() << ";" << paciente[i].getPeso() << ";"
+                << paciente[i].getPagamento() << ";" << consulta[i].getData()
+                << ";" << consulta[i].getHorario() << ";" << consulta[i].getConsulta() << endl;
+    }
 
     arquivo.close();
 }
@@ -62,8 +65,8 @@ void Menu::carregarPrograma()
 
     string linha;
     while (getline(arquivo, linha))
-    { 
-                // --- Pega a posição livre ---
+    {
+        // --- Pega a posição livre ---
         int pos = acharPosicao();
         stringstream ss(linha);
         string cpf, nome, pesoS, idadeSt, conv, telefone;
@@ -79,21 +82,22 @@ void Menu::carregarPrograma()
         getline(ss, telefone, ';');
         getline(ss, pesoS, ';');
         getline(ss, conv, ';');
-        getline(ss, data, ';');            
-        getline(ss, horario, ';');            
-        getline(ss, tipoconsulta);                
+        getline(ss, data, ';');
+        getline(ss, horario, ';');
+        getline(ss, tipoconsulta);
 
-        try {
+        try
+        {
             idade = stoi(idadeSt);
             peso = stof(pesoS);
             convenio = stoi(conv);
             cons = stoi(tipoconsulta);
-        } catch (...) {
+        }
+        catch (...)
+        {
             cout << "Erro na conversão da linha: " << linha << endl;
             continue; // pula linha inválida
         }
-
-
 
         // --- Atualiza paciente no vetor ---
         paciente[pos].setNome(nome);
@@ -109,7 +113,6 @@ void Menu::carregarPrograma()
 
     arquivo.close();
 }
-
 
 int Menu::acharPosicao()
 {
@@ -207,10 +210,10 @@ void Menu::agendarPaciente()
     cin.ignore();
     paciente[pos].setIdade(idadeP);
 
-        cout << "PESO: ";
-        cin >> peso;
-        paciente[pos].setPeso(peso);
-        cin.ignore();
+    cout << "PESO: ";
+    cin >> peso;
+    paciente[pos].setPeso(peso);
+    cin.ignore();
 
     // Telefone
     cout << "TELEFONE: ";
@@ -307,7 +310,6 @@ void Menu::agendarPaciente()
     consulta[pos].setHorario(horario);
     consulta[pos].setTipodeConsulta(static_cast<TipodeConsulta>(tipoConsulta));
     cout << "Paciente cadastrado com sucesso!\n";
-
 }
 
 void Menu::excluirPaciente()
@@ -345,33 +347,45 @@ void Menu::listarPaciente()
         cout << "Lista de pacientes:\n";
         for (int i = 0; i < 100; i++)
         {
-            
+
             if (!paciente[i].getNome().empty())
             {
                 encontrado = true;
                 cout << "Nome: " << paciente[i].getNome() << endl;
                 cout << "CPF: " << paciente[i].getcpf() << endl;
                 cout << "Idade: " << paciente[i].getIdade() << " anos" << endl;
-                string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +   
-                paciente[i].getTelefone().substr(2, 5) + "-" +          
-                paciente[i].getTelefone().substr(7, 4);
+                string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +
+                                  paciente[i].getTelefone().substr(2, 5) + "-" +
+                                  paciente[i].getTelefone().substr(7, 4);
                 cout << "Telefone: " << telefone << endl;
                 cout << "Peso: " << paciente[i].getPeso() << " Kg" << endl;
                 cout << "Pagamento: " << paciente[i].getPagamentoStr() << endl;
                 int tipoConsulta = static_cast<int>(consulta[i].getTipodeConsulta());
                 string tipoConsultaStr;
-                switch (tipoConsulta) {
-                    case 0: tipoConsultaStr = "RESTAURACAO"; break;
-                    case 1: tipoConsultaStr = "CLAREAMENTO"; break;
-                    case 2: tipoConsultaStr = "ORTODONTIA"; break;
-                    case 3: tipoConsultaStr = "LIMPEZA"; break;
-                    case 4: tipoConsultaStr = "EXAMES_ROTINA"; break;
-                    default: tipoConsultaStr = "DESCONHECIDO"; break;
+                switch (tipoConsulta)
+                {
+                case 0:
+                    tipoConsultaStr = "RESTAURACAO";
+                    break;
+                case 1:
+                    tipoConsultaStr = "CLAREAMENTO";
+                    break;
+                case 2:
+                    tipoConsultaStr = "ORTODONTIA";
+                    break;
+                case 3:
+                    tipoConsultaStr = "LIMPEZA";
+                    break;
+                case 4:
+                    tipoConsultaStr = "EXAMES_ROTINA";
+                    break;
+                default:
+                    tipoConsultaStr = "DESCONHECIDO";
+                    break;
                 }
                 cout << "Tipo de Consulta: " << tipoConsultaStr << endl;
                 cout << "Odontologista: " << consulta[i].getmedico(tipoConsulta) << endl;
                 cout << "------------------------" << endl;
-                
             }
         }
     }
@@ -388,21 +402,34 @@ void Menu::listarPaciente()
                 cout << "Nome: " << paciente[i].getNome() << endl;
                 cout << "CPF: " << paciente[i].getcpf() << endl;
                 cout << "Idade: " << paciente[i].getIdade() << " anos" << endl;
-                string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +   
-                paciente[i].getTelefone().substr(2, 5) + "-" +          
-                paciente[i].getTelefone().substr(7, 4);
+                string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +
+                                  paciente[i].getTelefone().substr(2, 5) + "-" +
+                                  paciente[i].getTelefone().substr(7, 4);
                 cout << "Telefone: " << telefone << endl;
                 cout << "Peso: " << paciente[i].getPeso() << " Kg" << endl;
                 cout << "Pagamento: " << paciente[i].getPagamentoStr() << endl;
                 int tipoConsulta = static_cast<int>(consulta[i].getTipodeConsulta());
                 string tipoConsultaStr;
-                switch (tipoConsulta) {
-                    case 0: tipoConsultaStr = "RESTAURACAO"; break;
-                    case 1: tipoConsultaStr = "CLAREAMENTO"; break;
-                    case 2: tipoConsultaStr = "ORTODONTIA"; break;
-                    case 3: tipoConsultaStr = "LIMPEZA"; break;
-                    case 4: tipoConsultaStr = "EXAMES_ROTINA"; break;
-                    default: tipoConsultaStr = "DESCONHECIDO"; break;
+                switch (tipoConsulta)
+                {
+                case 0:
+                    tipoConsultaStr = "RESTAURACAO";
+                    break;
+                case 1:
+                    tipoConsultaStr = "CLAREAMENTO";
+                    break;
+                case 2:
+                    tipoConsultaStr = "ORTODONTIA";
+                    break;
+                case 3:
+                    tipoConsultaStr = "LIMPEZA";
+                    break;
+                case 4:
+                    tipoConsultaStr = "EXAMES_ROTINA";
+                    break;
+                default:
+                    tipoConsultaStr = "DESCONHECIDO";
+                    break;
                 }
                 cout << "Tipo de Consulta: " << tipoConsultaStr << endl;
                 cout << "Odontologista: " << consulta[i].getmedico(tipoConsulta) << endl;
@@ -440,27 +467,41 @@ void Menu::relatorioPaciente()
             arquivo << "PACIENTE #" << count << "\n";
             arquivo << "Nome: " << paciente[i].getNome() << "\n";
             string cpf = paciente[i].getcpf().substr(0, 3) + "." +
-          paciente[i].getcpf().substr(3, 3) + "." +
-          paciente[i].getcpf().substr(6, 3) + "-" +
-          paciente[i].getcpf().substr(9, 2);
+                         paciente[i].getcpf().substr(3, 3) + "." +
+                         paciente[i].getcpf().substr(6, 3) + "-" +
+                         paciente[i].getcpf().substr(9, 2);
             arquivo << "CPF: " << cpf << "\n";
             arquivo << "Idade: " << paciente[i].getIdade() << "\n";
-            string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +   
-                paciente[i].getTelefone().substr(2, 5) + "-" +          
-                paciente[i].getTelefone().substr(7, 4); 
+            string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +
+                              paciente[i].getTelefone().substr(2, 5) + "-" +
+                              paciente[i].getTelefone().substr(7, 4);
             arquivo << "Telefone: " << telefone << "\n";
-            arquivo << "Peso: " << fixed << setprecision(2) << paciente[i].getPeso() << " Kg \n"; 
+            arquivo << "Peso: " << fixed << setprecision(2) << paciente[i].getPeso() << " Kg \n";
             int tipoConsulta = static_cast<int>(consulta[i].getTipodeConsulta());
-                string tipoConsultaStr;
-                switch (tipoConsulta) {
-                    case 0: tipoConsultaStr = "RESTAURACAO"; break;
-                    case 1: tipoConsultaStr = "CLAREAMENTO"; break;
-                    case 2: tipoConsultaStr = "ORTODONTIA"; break;
-                    case 3: tipoConsultaStr = "LIMPEZA"; break;
-                    case 4: tipoConsultaStr = "EXAMES_ROTINA"; break;
-                    default: tipoConsultaStr = "DESCONHECIDO"; break;
-                }
-            arquivo << "Procedimento: " << tipoConsultaStr << endl << "Odontologista: " << consulta[i].getmedico(tipoConsulta) << endl;  
+            string tipoConsultaStr;
+            switch (tipoConsulta)
+            {
+            case 0:
+                tipoConsultaStr = "RESTAURACAO";
+                break;
+            case 1:
+                tipoConsultaStr = "CLAREAMENTO";
+                break;
+            case 2:
+                tipoConsultaStr = "ORTODONTIA";
+                break;
+            case 3:
+                tipoConsultaStr = "LIMPEZA";
+                break;
+            case 4:
+                tipoConsultaStr = "EXAMES_ROTINA";
+                break;
+            default:
+                tipoConsultaStr = "DESCONHECIDO";
+                break;
+            }
+            arquivo << "Procedimento: " << tipoConsultaStr << endl
+                    << "Odontologista: " << consulta[i].getmedico(tipoConsulta) << endl;
             arquivo << "-----------------------------------------\n";
         }
     }

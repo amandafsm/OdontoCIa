@@ -8,13 +8,12 @@
 
 using namespace std;
 
-// enum de médico 
+// enum de médico
 // verificar se já tem todos atributos necessários
 // gerar relatorio (geral, consultas, medicos)
 // fazer diagrama (ultimo)
-// verificar se existe polimorfismo 
-// metodo para subscrever 
-
+// verificar se existe polimorfismo
+// metodo para subscrever
 
 // Classe Pessoa
 class Pessoa
@@ -35,9 +34,8 @@ public:
     string getcpf() { return cpf; }
     string getNome() { return nome; }
     int getIdade() { return idade; }
-    float getPeso(){ return peso;}
+    float getPeso() { return peso; }
 };
-
 
 // Classe Paciente
 class Paciente : public Pessoa
@@ -64,19 +62,21 @@ public:
     bool getParticular() const { return particular; }
 };
 
-void Paciente::setPeso(float p){
+void Paciente::setPeso(float p)
+{
     while (cin.fail() || p <= 0 || p > 200)
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Peso inválido. Exemplo: '0 até 200'" <<  "Digite novamente: ";
-            cin >> p;
-        }
-        peso = p;
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Peso inválido. Exemplo: '0 até 200'" << "Digite novamente: ";
+        cin >> p;
     }
+    peso = p;
+}
 void Paciente::setcpf(string c)
 {
-    while (c.length() != 11) {
+    while (c.length() != 11)
+    {
         cout << "CPF inválido. Exemplo: '12345678911'\nDigite novamente: ";
         getline(cin >> ws, c);
     }
@@ -110,23 +110,32 @@ void Paciente::setIdade(int i)
     }
     idade = i;
 }
-string Paciente::getPagamentoStr(){
-    if(convenio == true){
+string Paciente::getPagamentoStr()
+{
+    if (convenio == true)
+    {
         return "Convênio";
-    }else{
+    }
+    else
+    {
         return "Particular";
     }
 }
-int Paciente::getPagamento(){
-    if(convenio == true){
+int Paciente::getPagamento()
+{
+    if (convenio == true)
+    {
         return 0;
-    }else{
+    }
+    else
+    {
         return 1;
     }
-
 }
-void Paciente::setTelefone(string t) {
-    while (t.length() != 11) {
+void Paciente::setTelefone(string t)
+{
+    while (t.length() != 11)
+    {
         cout << "Telefone inválido. Exemplo: '83912345678'\nDigite novamente: ";
         getline(cin >> ws, t);
     }
@@ -186,10 +195,10 @@ public:
     string getData() const { return data; }
     string getHorario() const { return horario; }
     TipodeConsulta getTipodeConsulta() const { return tipo; }
-    int getConsulta(){ return static_cast<int>(tipo); }
+    int getConsulta() { return static_cast<int>(tipo); }
     string getParecer() const { return parecer; }
     string getDataProcedimento() const { return dataProcedimento; }
-    string getmedico(int i); 
+    string getmedico(int i);
     string corrigirHora(string h);
 
     static TipodeConsulta stringToTipodeConsulta(const string &t)
@@ -208,9 +217,10 @@ public:
     }
 };
 
-string Consulta::corrigirHora(string h){
+string Consulta::corrigirHora(string h)
+{
     string hora = h.substr(0, 2) + ":" +
-          h.substr(2, 2);
-          return hora;
+                  h.substr(2, 2);
+    return hora;
 }
-string Consulta::getmedico(int i){ return medico[i]; }
+string Consulta::getmedico(int i) { return medico[i]; }

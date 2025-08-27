@@ -3,7 +3,7 @@
 using namespace std;
 
 // Função para limpar a tela
- void limparTela()
+void limparTela()
 {
 #ifdef _WIN32
     system("cls");
@@ -11,7 +11,6 @@ using namespace std;
     system("clear");
 #endif
 }
-
 
 void exibirMenu()
 {
@@ -40,7 +39,7 @@ int main()
         exibirMenu();
         cin >> opcao;
 
-        // tratamento de erro para entrada inválida 
+        // tratamento de erro para entrada inválida
         if (cin.fail())
         {
             cin.clear();
@@ -67,7 +66,7 @@ int main()
             cout << "📋 Lista de Pacientes\n";
             m1.listarPaciente();
             break;
-         case 5:
+        case 5:
             cout << "📋 Gerar Relatório\n";
             m1.relatorioPaciente();
             break;
