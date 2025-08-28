@@ -56,7 +56,7 @@ cd OdontoCIa
 
 Compile o código
 
-g++ main.cpp -o odonto
+g++ odonto.cpp -o odonto
 ---
 
 Execute o programa
