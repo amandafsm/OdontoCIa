@@ -2,6 +2,7 @@
 
 OdontoCIa é um sistema desenvolvido em C++ para rodar no terminal.
 O objetivo é auxiliar uma clínica odontológica no gerenciamento de agendamentos de pacientes, oferecendo funções de cadastro, listagem, edição, exclusão e relatórios.
+
 ---
 
 ## 📌 Funcionalidades
@@ -33,6 +34,7 @@ Procedimento
 ✅ Listar Pacientes – Exibir todos os pacientes cadastrados ou apenas um, buscando por seu CPF.
 
 ✅ Gerar Relatórios – Produzir relatórios com os agendamentos realizados.
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -40,6 +42,7 @@ Procedimento
 Linguagem: C++
 
 Entrada/Saída: Terminal (Console Application)
+
 ---
 
 ## 🚀 Como Executar
@@ -47,19 +50,23 @@ Entrada/Saída: Terminal (Console Application)
 Clone o repositório
 
 git clone https://github.com/seuusuario/OdontoCIa.git
+
 --- 
 
 Entre na pasta do projeto
 
 cd OdontoCIa
+
 ---
 
 Compile o código
 
 g++ odonto.cpp -o odonto
+
 ---
 
 Execute o programa
 
 ./odonto
+
 ---
