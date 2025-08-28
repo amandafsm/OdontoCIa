@@ -101,6 +101,15 @@ Peso: 68.00 Kg
 Procedimento: ORTODONTIA
 Odontologista: Camila Ferreira
 -----------------------------------------
+PACIENTE #12
+Nome: Maria Amanda 
+CPF: 999.111.222-55
+Idade: 20
+Telefone: (81) 98223-3928
+Peso: 60.00 Kg 
+Procedimento: EXAMES_ROTINA
+Odontologista: Beatriz Mendes
+-----------------------------------------
 
-Total de pacientes: 11
+Total de pacientes: 12
 =========================================

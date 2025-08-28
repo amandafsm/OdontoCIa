@@ -8,17 +8,8 @@
 
 using namespace std;
 
-// enum de médico
-// verificar se já tem todos atributos necessários
-// gerar relatorio (geral, consultas, medicos)
-// fazer diagrama (ultimo)
-// verificar se existe polimorfismo
-// metodo para subscrever
-
-// Classe Pessoa
 class Pessoa
 {
-
 protected:
     string nome;
     int idade;
@@ -37,10 +28,9 @@ public:
     float getPeso() { return peso; }
 };
 
-// Classe Paciente
 class Paciente : public Pessoa
 {
-private:
+protected:
     string telefone;
     bool convenio;
     bool particular;
@@ -166,10 +156,9 @@ enum class TipodeConsulta
     EXAMES_ROTINA
 };
 
-// Classe Consulta
 class Consulta
 {
-private:
+protected:
     Paciente paciente;
     string medico[5] = {"Mariana Lopes", "Ricardo Nogueira", "Camila Ferreira", "André Carvalho", "Beatriz Mendes"};
     string data;

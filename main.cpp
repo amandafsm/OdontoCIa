@@ -1,4 +1,11 @@
 #include "crud.hpp"
+#include "editar.hpp"
+#include "excluir.hpp"
+#include "agendar.hpp"
+#include "listar.hpp"
+#include "carregar.hpp"
+#include "salvar.hpp"
+#include "relatorio.hpp" 
 
 using namespace std;
 
