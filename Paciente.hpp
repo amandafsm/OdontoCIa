@@ -27,6 +27,9 @@ public:
     int getIdade() { return idade; }
     float getPeso() { return peso; }
 };
+// Para ter polimorfismo lista/vetor, basta declarar um vetor de ponteiros para Pessoa.
+// Isso não altera sua estrutura, apenas adiciona a possibilidade de armazenar objetos derivados.
+vector<Pessoa*> pessoas; // Pode armazenar Paciente* ou outras subclasses de Pessoa
 
 class Paciente : public Pessoa
 {

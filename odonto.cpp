@@ -5,7 +5,7 @@
 #include "listar.hpp"
 #include "carregar.hpp"
 #include "salvar.hpp"
-#include "relatorio.hpp" 
+#include "relatorio.hpp"
 
 using namespace std;
 

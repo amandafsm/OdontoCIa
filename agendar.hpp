@@ -63,10 +63,31 @@ void Menu::agendarPaciente()
         cout << "Insira a data da Consulta: " << endl;
         cout << "Dia: ";
         cin >> dia;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entrada inválida para o dia. Tente novamente." << endl;
+            continue;
+        }
         cout << "Mes: ";
         cin >> mes;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entrada inválida para o mês. Tente novamente." << endl;
+            continue;
+        }
         cout << "Ano: ";
         cin >> ano;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entrada inválida para o ano. Tente novamente." << endl;
+            continue;
+        }
         cin.ignore();
 
         // Verifica validade do mês
