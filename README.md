@@ -4,6 +4,10 @@ OdontoCIa é um sistema desenvolvido em C++ para rodar no terminal.
 O objetivo é auxiliar uma clínica odontológica no gerenciamento de agendamentos de pacientes, oferecendo funções de cadastro, listagem, edição, exclusão e relatórios.
 
 ---
+## Diagrama UML
+![Diagrama UML](diagrama.png)
+
+---
 
 ## 📌 Funcionalidades
 
