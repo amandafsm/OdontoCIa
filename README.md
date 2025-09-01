@@ -5,7 +5,7 @@ O objetivo é auxiliar uma clínica odontológica no gerenciamento de agendament
 
 ---
 ## Diagrama UML
-![Diagrama UML](diagrama.png)
+![Diagrama UML](img/diagrama.png)
 
 ---
 
