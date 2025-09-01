@@ -6,6 +6,30 @@
 #pragma once
 
 using namespace std;
+void Menu::listarMedico()
+{
+   cout << "Lista de Médicos:\n";
+        for (int i = 0; i < 5; i++)
+        {
+            cout << "Nome: " << medicos[i].getNome() << endl;
+                string cpf = medicos[i].getcpf().substr(0, 3) + "." +
+                         medicos[i].getcpf().substr(3, 3) + "." +
+                         medicos[i].getcpf().substr(6, 3) + "-" +
+                         medicos[i].getcpf().substr(9, 2);
+                cout << "CPF: " << cpf << endl;
+                cout << "Idade: " << medicos[i].getIdade() << " anos" << endl;
+                string telefone = "(" + medicos[i].getTelefone().substr(0, 2) + ") " +
+                                  medicos[i].getTelefone().substr(2, 5) + "-" +
+                                  medicos[i].getTelefone().substr(7, 4);
+                cout << "Telefone: " << telefone << endl;
+                cout << "Crm: " << medicos[i].getCrm() << endl;
+                cout << "Especialidade: " << medicos[i].getEspec() << endl;
+                cout << "------------------------" << endl;
+            
+        }
+    
+} 
+
 
 void Menu::listarPaciente()
 {
@@ -24,7 +48,11 @@ void Menu::listarPaciente()
             {
                 encontrado = true;
                 cout << "Nome: " << paciente[i].getNome() << endl;
-                cout << "CPF: " << paciente[i].getcpf() << endl;
+                string cpf = paciente[i].getcpf().substr(0, 3) + "." +
+                         paciente[i].getcpf().substr(3, 3) + "." +
+                         paciente[i].getcpf().substr(6, 3) + "-" +
+                         paciente[i].getcpf().substr(9, 2);
+                cout << "CPF: " << cpf << endl;
                 cout << "Idade: " << paciente[i].getIdade() << " anos" << endl;
                 string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +
                                   paciente[i].getTelefone().substr(2, 5) + "-" +
@@ -57,6 +85,10 @@ void Menu::listarPaciente()
                 }
                 cout << "Tipo de Consulta: " << tipoConsultaStr << endl;
                 cout << "Odontologista: " << consulta[i].getmedico(tipoConsulta) << endl;
+                string data = consulta[i].getData().substr(0,2) + "/" + consulta[i].getData().substr(2,2) + "/" + consulta[i].getData().substr(4,4);
+                cout << "Data da Consulta: " << data << endl;
+                string horario = consulta[i].getHorario().substr(0, 2) + ":" + consulta[i].getHorario().substr(2,2);
+                cout << "Horario: " << horario << endl;
                 cout << "------------------------" << endl;
             }
         }
@@ -72,7 +104,11 @@ void Menu::listarPaciente()
             {
                 cout << "------------------------" << endl;
                 cout << "Nome: " << paciente[i].getNome() << endl;
-                cout << "CPF: " << paciente[i].getcpf() << endl;
+                string cpf = paciente[i].getcpf().substr(0, 3) + "." +
+                         paciente[i].getcpf().substr(3, 3) + "." +
+                         paciente[i].getcpf().substr(6, 3) + "-" +
+                         paciente[i].getcpf().substr(9, 2);
+                cout << "CPF: " << cpf << endl;
                 cout << "Idade: " << paciente[i].getIdade() << " anos" << endl;
                 string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +
                                   paciente[i].getTelefone().substr(2, 5) + "-" +
@@ -105,6 +141,10 @@ void Menu::listarPaciente()
                 }
                 cout << "Tipo de Consulta: " << tipoConsultaStr << endl;
                 cout << "Odontologista: " << consulta[i].getmedico(tipoConsulta) << endl;
+                string data = consulta[i].getData().substr(0,2) + "/" + consulta[i].getData().substr(2,2) + "/" + consulta[i].getData().substr(4,4);
+                cout << "Data da Consulta: " << data << endl;
+                string horario = consulta[i].getHorario().substr(0, 2) + ":" + consulta[i].getHorario().substr(2,2);
+                cout << "Horario: " << horario << endl;
                 cout << "------------------------" << endl;
             }
             else

@@ -151,7 +151,7 @@ void Menu::editarPaciente()
                     }
 
                     char novoBuffer[11];
-                    snprintf(novoBuffer, sizeof(novoBuffer), "%02d/%02d/%04d", novoDia, novoMes, novoAno);
+                    snprintf(novoBuffer, sizeof(novoBuffer), "%02d%02d%04d", novoDia, novoMes, novoAno);
 
                     novaData = novoBuffer;
                     consulta[i].setData(novoBuffer);
@@ -178,6 +178,7 @@ void Menu::editarPaciente()
                         cout << "Horário inválido. Digite novamente (formato HH:MM): ";
                         getline(cin >> ws, novoHorario);
                     }
+                    novoHorario = novoHorario.substr(0,2) + novoHorario.substr(3,2);
                     consulta[i].setHorario(novoHorario);
                     break;
                 }

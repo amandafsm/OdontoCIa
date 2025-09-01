@@ -35,7 +35,7 @@ void Menu::relatorioPaciente()
                          paciente[i].getcpf().substr(6, 3) + "-" +
                          paciente[i].getcpf().substr(9, 2);
             arquivo << "CPF: " << cpf << "\n";
-            arquivo << "Idade: " << paciente[i].getIdade() << "\n";
+            arquivo << "Idade: " << paciente[i].getIdade() << " anos\n";
             string telefone = "(" + paciente[i].getTelefone().substr(0, 2) + ") " +
                               paciente[i].getTelefone().substr(2, 5) + "-" +
                               paciente[i].getTelefone().substr(7, 4);
@@ -64,8 +64,12 @@ void Menu::relatorioPaciente()
                 tipoConsultaStr = "DESCONHECIDO";
                 break;
             }
+            string data = consulta[i].getData().substr(0,2) + "/" + consulta[i].getData().substr(2,2) + "/" + consulta[i].getData().substr(4,4);
+            string horario = consulta[i].getHorario().substr(0, 2) + ":" + consulta[i].getHorario().substr(2,2);
             arquivo << "Procedimento: " << tipoConsultaStr << endl
-                    << "Cirurgião-dentista: " << consulta[i].getmedico(tipoConsulta) << endl;
+                    << "Cirurgião-dentista: " << consulta[i].getmedico(tipoConsulta) << endl
+                     << "Data da Consulta: " << data << endl
+                     << "Horario: " << horario << endl;
             arquivo << "-----------------------------------------\n";
         }
     }

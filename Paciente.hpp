@@ -54,7 +54,6 @@ public:
     string getPagamentoStr();
     bool getParticular() const { return particular; }
 };
-
 void Paciente::setPeso(float p)
 {
     while (cin.fail() || p <= 0 || p > 200)
@@ -148,6 +147,80 @@ void Paciente::setPagamento(int i)
         particular = true;
     }
 }
+
+class Medico: public Pessoa{
+    protected:
+    string crm;
+    string espec;
+    string telefone;
+    public:
+    Medico(string n, int i, string c, string t, string crm, string e); 
+    void setPeso(float p) { peso = p;}
+    void setcpf(string c);
+    void setNome(string n);
+    void setIdade(int i);
+    void setTelefone(string t);
+    void setCrm(string c){ crm = c; }
+    void setEspec(string e){ espec = e; }
+    string getTelefone() const { return telefone; }
+    string getCrm(){ return crm; }
+    string getEspec(){ return espec; }
+};
+Medico::Medico(string n, int i, string c, string t, string crm, string e){
+    setNome(n);
+    setIdade(i);
+    setcpf(c);
+    setTelefone(t);
+    setCrm(crm);
+    setEspec(e);
+}
+void Medico::setcpf(string c)
+{
+    while (c.length() != 11)
+    {
+        cout << "CPF inválido. Exemplo: '12345678911'\nDigite novamente: ";
+        getline(cin >> ws, c);
+    }
+
+    cpf = c;
+}
+void Medico::setTelefone(string t)
+{
+    while (t.length() != 11)
+    {
+        cout << "Telefone inválido. Exemplo: '83912345678'\nDigite novamente: ";
+        getline(cin >> ws, t);
+    }
+
+    telefone = t;
+}
+void Medico::setNome(string n)
+{
+    string temp = "";
+    if (n.empty())
+    {
+        while (n.empty())
+        {
+            cout << "Nome não pode ser vazio. Digite novamente: ";
+            getline(cin >> ws, temp);
+            nome = temp;
+        }
+    }
+    else
+    {
+        nome = n;
+    }
+}
+void Medico::setIdade(int i)
+{
+    if (i > 100)
+    {
+        cout << "Idade inválida. Digite novamente:";
+        cin >> i;
+    }
+    idade = i;
+}
+
 
 // Enumeração para tipos de consulta
 enum class TipodeConsulta

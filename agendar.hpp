@@ -129,7 +129,7 @@ void Menu::agendarPaciente()
 
     // Formata a data como DD/MM/AAAA
     char buffer[11];
-    snprintf(buffer, sizeof(buffer), "%02d/%02d/%04d", dia, mes, ano);
+    snprintf(buffer, sizeof(buffer), "%02d%02d%04d", dia, mes, ano);
     data = buffer;
 
     cout << "Horário (formato HH:MM): ";
@@ -143,6 +143,7 @@ void Menu::agendarPaciente()
         cout << "Horário inválido. Digite novamente (formato HH:MM): ";
         getline(cin >> ws, horario);
     }
+    horario = horario.substr(0,2) + horario.substr(3,2);
     cout << "Tipo de consulta (0=RESTAURACAO, 1=CLAREAMENTO, 2=ORTODONTIA, 3=LIMPEZA, 4=EXAMES_ROTINA): " << endl;
     cin >> tipoConsulta;
     while (cin.fail() || tipoConsulta < 0 || tipoConsulta > 4)
