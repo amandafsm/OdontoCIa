@@ -19,7 +19,7 @@ void Menu::carregarPrograma()
     string linha;
     while (getline(arquivo, linha))
     {
-        // --- Pega a posição livre ---
+
         int pos = acharPosicao();
         stringstream ss(linha);
         string cpf, nome, pesoS, idadeSt, conv, telefone;
@@ -49,10 +49,9 @@ void Menu::carregarPrograma()
         catch (...)
         {
             cout << "Erro na conversão da linha: " << linha << endl;
-            continue; // pula linha inválida
+            continue; 
         }
 
-        // --- Atualiza paciente no vetor ---
         paciente[pos].setNome(nome);
         paciente[pos].setcpf(cpf);
         paciente[pos].setIdade(idade);
@@ -76,6 +75,6 @@ int Menu::acharPosicao()
             return i;
         }
     }
-    // Se não houver posição disponível, retorna sempre a última posição
+
     return 99;
 }

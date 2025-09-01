@@ -109,21 +109,20 @@ void Menu::editarPaciente()
                             continue;
                         }
 
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
 
-                        // Verifica validade do mês
+                   
                         if (novoMes < 1 || novoMes > 12)
                         {
                             cout << "Mês inválido. Tente novamente." << endl;
                             continue;
                         }
 
-                        // Verifica validade do dia
                         int diasNoMes;
                         switch (novoMes)
                         {
                         case 2:
-                            // Ano bissexto
+                            
                             if ((novoAno % 4 == 0 && novoAno % 100 != 0) || (novoAno % 400 == 0))
                                 diasNoMes = 29;
                             else
@@ -146,7 +145,6 @@ void Menu::editarPaciente()
                             continue;
                         }
 
-                        // Se chegou até aqui, a data é válida
                         break;
                     }
 
@@ -170,7 +168,6 @@ void Menu::editarPaciente()
                     cout << "Digite o novo Horário: " << endl;
                     getline(cin, novoHorario);
 
-                    // Validação simples do formato "HH:MM"
                     while (novoHorario.length() != 5 || novoHorario[2] != ':' ||
                            !isdigit(novoHorario[0]) || !isdigit(novoHorario[1]) ||
                            !isdigit(novoHorario[3]) || !isdigit(novoHorario[4]))

@@ -16,7 +16,6 @@ void Menu::salvarPrograma()
         cout << "Erro ao abrir o arquivo!" << endl;
         return;
     }
-    // Escrever apenas os elementos realmente usados
 
     for (int i = 0; i < acharPosicao(); i++)
     {

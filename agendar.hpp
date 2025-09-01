@@ -14,7 +14,6 @@ void Menu::agendarPaciente()
     int idadeP, idadeM, tipoInt, tipoConsulta;
     int pos = 0;
     pos = acharPosicao();
-    //  Nome do paciente
     cout << "NOME: ";
     getline(cin >> ws, nomeP);
     paciente[pos].setNome(nomeP);
@@ -23,7 +22,6 @@ void Menu::agendarPaciente()
     getline(cin >> ws, cpf);
     paciente[pos].setcpf(cpf);
 
-    // Idade do paciente
     cout << "IDADE: ";
     cin >> idadeP;
     while (cin.fail() || idadeP <= 0 || idadeP > 80)
@@ -41,7 +39,6 @@ void Menu::agendarPaciente()
     paciente[pos].setPeso(peso);
     cin.ignore();
 
-    // Telefone
     cout << "TELEFONE: ";
     getline(cin, telefone);
     while (telefone.empty() || telefone.length() < 11)
@@ -97,12 +94,11 @@ void Menu::agendarPaciente()
             continue;
         }
 
-        // Verifica validade do dia
         int diasNoMes;
         switch (mes)
         {
         case 2:
-            // Verifica ano bissexto
+          
             if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))
                 diasNoMes = 29;
             else
@@ -127,7 +123,6 @@ void Menu::agendarPaciente()
         dataValida = true;
     }
 
-    // Formata a data como DD/MM/AAAA
     char buffer[11];
     snprintf(buffer, sizeof(buffer), "%02d%02d%04d", dia, mes, ano);
     data = buffer;
@@ -135,7 +130,6 @@ void Menu::agendarPaciente()
     cout << "Horário (formato HH:MM): ";
     getline(cin, horario);
 
-    // Validação simples do formato "HH:MM"
     while (horario.length() != 5 || horario[2] != ':' ||
            !isdigit(horario[0]) || !isdigit(horario[1]) ||
            !isdigit(horario[3]) || !isdigit(horario[4]))
